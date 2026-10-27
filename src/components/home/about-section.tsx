@@ -1,38 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { PartnerLogos } from "@/components/partner-logos";
 import { RevealGroup } from "@/components/reveal-group";
 import flowerBath from "@/assets/images/about/flower-bath.webp";
 import labTeam from "@/assets/images/about/lab-team.png";
 
 const aboutCopy =
   "Daily Bath is currently at an early brand-development stage. The brand name has been established, while its product portfolio, brand positioning, visual direction, and communication strategy are still being explored";
-
-const partnerLogos = [
-  { name: "UMRA", src: "/logos/umra.svg", width: 181, height: 44 },
-  { name: "EPA", src: "/logos/epa.svg", width: 121, height: 48 },
-  { name: "ARISE", src: "/logos/arise.svg", width: 111, height: 44 },
-];
-
-function PartnerLogos() {
-  return (
-    <ul
-      aria-label="Partners and certifications"
-      className="flex flex-wrap items-center justify-center gap-x-[18.8px] gap-y-3 md:justify-start md:gap-x-[25px] lg:justify-end min-[1800px]:gap-x-[37.6px]"
-    >
-      {partnerLogos.map((logo) => (
-        <li key={logo.name}>
-          <Image
-            src={logo.src}
-            alt={logo.name}
-            width={logo.width}
-            height={logo.height}
-            className="h-[22px] w-auto md:h-[29px] min-[1800px]:h-11"
-          />
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 export function AboutSection() {
   return (
@@ -86,7 +60,7 @@ export function AboutSection() {
             className="flex w-full flex-col items-center gap-3 text-center md:w-[379px] md:items-start md:gap-4 md:text-left lg:w-full lg:items-end lg:gap-6 lg:text-right"
           >
             <p className="text-xs leading-[18px] md:text-sm md:leading-5 lg:w-[89%] min-[1600px]:text-base min-[1600px]:leading-6">{aboutCopy}</p>
-            <PartnerLogos />
+            <PartnerLogos className="justify-center md:justify-start lg:justify-end" />
           </div>
 
           <div data-reveal="right" style={{ transitionDelay: "150ms" }} className="relative size-[225px] shrink-0 lg:size-auto lg:aspect-square lg:w-[75.6%]">

@@ -46,7 +46,7 @@ function Socials({ className = "" }: { className?: string }) {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-18 px-3 pb-3 md:mt-22 md:px-4 md:pb-4 lg:mt-44 lg:px-6 lg:pb-6">
+    <footer className="px-3 pb-3 md:px-4 md:pb-4 lg:px-6 lg:pb-6">
       <div className="site-footer-grid rounded-lg bg-secondary-500 px-3 pt-5 pb-8 text-white md:px-4 md:pb-4 lg:px-12 lg:py-12 2xl:p-20">
         <div className="flex flex-col items-center gap-8 border-b border-white pb-4 [grid-area:blurb] md:flex-row md:justify-between md:gap-6 lg:items-start lg:border-0 lg:pb-0">
           <p className="text-center text-sm leading-5 font-medium md:max-w-[436px] md:text-left md:text-base md:leading-6 lg:max-w-[675px] lg:pr-10 lg:font-display lg:text-lg lg:leading-7 lg:font-semibold 2xl:text-2xl 2xl:leading-8">

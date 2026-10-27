@@ -6,7 +6,7 @@ import { WhyChooseUs } from "@/components/home/why-choose-us";
 
 export default function HomePage() {
   return (
-    <main id="main-content">
+    <main id="main-content" className="pb-18 md:pb-22 lg:pb-44">
       <HomeHero />
       <FeaturedCollection />
       <AboutSection />
