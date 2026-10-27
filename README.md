@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Daily Bath website
 
-## Getting Started
+Next.js (App Router, TypeScript, Tailwind CSS) site for the Daily Bath brand: Home, Products, Product Details, Brand Story and Contact.
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then fill in the Supabase values
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Checks: `npm run lint`, `npx tsc --noEmit`, `npm run build`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact form and Supabase
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Contact form submissions are validated on the server (`src/app/contact/actions.ts`) and saved to the `form_submissions` table in Supabase.
 
-## Learn More
+1. Create a Supabase project.
+2. Apply the migration in `supabase/migrations/` (Supabase CLI `supabase db push`, or paste the SQL into the SQL editor).
+3. Copy the project URL and anon/publishable key from **Project Settings → API** into `.env.local` (and your hosting provider's environment settings).
+4. Rebuild and redeploy. `NEXT_PUBLIC_*` values are read at build time.
 
-To learn more about Next.js, take a look at the following resources:
+Without these settings the form still validates input, but shows visitors a "couldn't send" message with the email address instead of saving.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Security model
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Row Level Security is enabled on `form_submissions`. The public (anon) role may **insert only**, and only the form's columns; it cannot read, change or delete rows. Admin access will be added with the admin panel.
+- All input is validated and length-limited on the server; the database repeats the key checks as constraints.
+- Spam controls: a hidden honeypot field and an in-memory rate limit of 5 messages per 10 minutes per IP address. The limiter only covers one server instance and trusts the `x-forwarded-for` header, so also enable your host's rate limiting / bot protection (e.g. Vercel Firewall) in production.
+- Server Actions check the request origin, which protects the form against cross-site request forgery.
+- Logs record only failure status codes, never submitted personal data.
+- Never put a service-role key in a `NEXT_PUBLIC_*` variable.
