@@ -59,6 +59,41 @@ body {
   .reveal-group:not([data-revealed]) [data-reveal="right"] {
     transform: translateX(4rem);
   }
+  .reveal-group:not([data-revealed]) [data-reveal="up"] {
+    transform: translateY(3rem);
+  }
+}
+
+/* Footer layout: stacked on mobile, three rows on tablet, two columns on desktop. */
+.site-footer-grid {
+  display: grid;
+  grid-template-areas: "blurb" "links" "address" "parent" "brand";
+  justify-items: center;
+  row-gap: 2rem;
+}
+
+@media (width >= 48rem) {
+  .site-footer-grid {
+    grid-template-areas: "blurb blurb" "links address" "parent brand";
+    grid-template-columns: 1fr auto;
+    justify-items: stretch;
+    row-gap: 2rem;
+  }
+  .site-footer-grid > :nth-child(4) {
+    margin-top: 1rem;
+  }
+}
+
+@media (width >= 64rem) {
+  .site-footer-grid {
+    grid-template-areas: "blurb address" "blurb links" "parent brand";
+    grid-template-columns: 53.9% 1fr;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 3.5rem;
+  }
+  .site-footer-grid > :nth-child(4) {
+    margin-top: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
