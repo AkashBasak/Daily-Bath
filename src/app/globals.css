@@ -19,9 +19,22 @@
 
   --color-secondary-500: #0a168a;
 
+  --animate-fade-in: fade-in 500ms ease-out;
+
   /* Breakpoints: mobile < 768px, tablet 768–1023px, desktop >= 1024px. */
   --breakpoint-md: 48rem;
   --breakpoint-lg: 64rem;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 body {
