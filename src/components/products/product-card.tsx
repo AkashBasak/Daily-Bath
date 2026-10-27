@@ -24,7 +24,7 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, headingLevel: Heading = "h2" }: { product: Product; headingLevel?: "h2" | "h3" }) {
   return (
     <Link
       href={`/products/${product.slug}`}
@@ -55,9 +55,9 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="flex flex-col gap-1 md:gap-2 2xl:gap-4">
-        <h2 className="text-sm leading-5 text-neutral-900 transition-colors duration-300 group-hover:text-primary-800 md:text-base md:leading-6 md:font-medium lg:font-display lg:text-lg lg:leading-7 2xl:text-2xl 2xl:leading-8">
+        <Heading className="text-sm leading-5 text-neutral-900 transition-colors duration-300 group-hover:text-primary-800 md:text-base md:leading-6 md:font-medium lg:font-display lg:text-lg lg:leading-7 2xl:text-2xl 2xl:leading-8">
           {product.name}
-        </h2>
+        </Heading>
         <Stars rating={product.rating} />
       </div>
     </Link>
