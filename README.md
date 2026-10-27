@@ -31,3 +31,8 @@ Without these settings the form still validates input, but shows visitors a "cou
 - Server Actions check the request origin, which protects the form against cross-site request forgery.
 - Logs record only failure status codes, never submitted personal data.
 - Never put a service-role key in a `NEXT_PUBLIC_*` variable.
+
+## Project notes
+
+- `docs/PROJECT_INSTRUCTIONS.md`: working rules for building this site.
+- `docs/HANDOFF.md`: what is done, Figma frame IDs, and open items.
