@@ -13,10 +13,11 @@ export function HomeHero() {
       <div className="flex w-full max-w-[1740px] flex-col items-center gap-8 md:px-[2.35%] lg:gap-16 lg:px-0">
         <h1
           id="home-hero-heading"
-          className="w-full text-center font-display text-[calc((100vw-3.5rem)/9.3)] leading-[1.22] font-bold tracking-[0.04em] text-balance text-neutral-900 md:text-[calc((100vw-6rem)/9.3)] lg:text-[min(calc((100vw-11.25rem)/9.3),11.78rem)] lg:leading-[0.8125]"
+          className="w-full text-center font-display text-[calc((100vw-3.5rem)/9.5)] leading-[1.22] font-bold tracking-[0.04em] whitespace-nowrap text-neutral-900 md:text-[calc((100vw-6rem)/9.5)] lg:text-[min(calc((100vw-11.25rem)/9.5),calc(1740px/9.6))] lg:leading-[0.8125]"
         >
           <span className="sr-only">GLOW NATURALLY</span>
-          {/* Each letter rises out of a mask; words stay together when wrapping. */}
+          {/* Each letter rises out of a mask. The set renders ~9.47em wide, so the
+              font size divides the available width by 9.5 to stay on one line. */}
           <span aria-hidden="true">
             {headline.map((word, w) => (
               <span key={word}>
