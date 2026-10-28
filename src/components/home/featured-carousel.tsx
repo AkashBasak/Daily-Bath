@@ -136,7 +136,7 @@ export function FeaturedCarousel({ products, initialIndex = 0 }: { products: Fea
                   src={product.image}
                   alt={isActive ? product.imageAlt : ""}
                   sizes="(min-width: 1024px) 540px, 300px"
-                  className="h-full w-auto max-w-none object-contain select-none"
+                  className={`h-full w-auto max-w-none object-contain select-none ${isActive ? "animate-float" : ""}`}
                   draggable={false}
                 />
               </div>
@@ -171,7 +171,7 @@ export function FeaturedCarousel({ products, initialIndex = 0 }: { products: Fea
       <Link
         href={`/products/${active.slug}`}
         aria-label={`Learn more about ${active.name}`}
-        className="flex h-10 items-center justify-center rounded-lg bg-primary-500 px-8 text-sm leading-5 font-semibold text-white transition-colors hover:bg-primary-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-800 md:h-12 md:text-base md:leading-6 lg:h-14 lg:text-lg lg:leading-7"
+        className="btn-sheen flex h-10 items-center justify-center rounded-lg bg-primary-500 px-8 text-sm leading-5 font-semibold text-white transition-colors hover:bg-primary-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-800 md:h-12 md:text-base md:leading-6 lg:h-14 lg:text-lg lg:leading-7"
       >
         Learn More
       </Link>

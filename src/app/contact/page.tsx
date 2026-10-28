@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import friendsPhone from "@/assets/images/contact/friends-phone.png";
 import { ContactForm } from "@/components/contact/contact-form";
+import { RevealGroup } from "@/components/reveal-group";
 import { socialLinks } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -52,13 +53,14 @@ const emails = ["info@chardike.com", "support@chardike.com"];
 export default function ContactPage() {
   return (
     <main id="main-content" className="px-3 pt-4 pb-16 md:px-4 md:pt-4 md:pb-13 lg:px-6 lg:pt-8 lg:pb-11">
-      <div className="mx-auto flex max-w-[1740px] flex-col gap-2 md:gap-2 lg:flex-row lg:gap-8">
+      <div className="stagger-in mx-auto flex max-w-[1740px] flex-col gap-2 md:gap-2 lg:flex-row lg:gap-8">
         <div className="relative aspect-[369/134] overflow-hidden rounded-lg md:aspect-[736/350] lg:aspect-auto lg:min-h-[480px] lg:flex-1 lg:rounded-xl">
           <Image
             src={friendsPhone}
             alt="Two friends laughing while looking at a phone"
             fill
             priority
+            placeholder="blur"
             sizes="(min-width: 1024px) 58vw, 100vw"
             className="object-cover"
           />
@@ -110,11 +112,15 @@ export default function ContactPage() {
         </section>
       </div>
 
-      <section aria-labelledby="query-heading" className="mx-auto mt-10 flex max-w-[920px] flex-col items-center gap-6 md:mt-12 md:max-w-[602px] md:gap-8 lg:mt-18 lg:max-w-[920px] lg:gap-12">
-        <h2 id="query-heading" className="font-display text-xl leading-7 font-bold text-neutral-900 md:text-[40px] md:leading-12 lg:text-6xl lg:leading-[76px] 2xl:text-7xl 2xl:leading-[88px]">
-          Have any Query?
-        </h2>
-        <ContactForm />
+      <section aria-labelledby="query-heading" className="mx-auto mt-10 max-w-[920px] md:mt-12 md:max-w-[602px] lg:mt-18 lg:max-w-[920px]">
+        <RevealGroup className="flex flex-col items-center gap-6 md:gap-8 lg:gap-12">
+          <h2 data-reveal="up" id="query-heading" className="font-display text-xl leading-7 font-bold text-neutral-900 md:text-[40px] md:leading-12 lg:text-6xl lg:leading-[76px] 2xl:text-7xl 2xl:leading-[88px]">
+            Have any Query?
+          </h2>
+          <div data-reveal="up" style={{ transitionDelay: "120ms" }} className="w-full">
+            <ContactForm />
+          </div>
+        </RevealGroup>
       </section>
     </main>
   );

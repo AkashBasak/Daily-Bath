@@ -73,6 +73,7 @@ function ReelCard({ reel, playing, onPlay, onStop }: { reel: Reel; playing: bool
         src={reel.poster}
         alt=""
         fill
+        placeholder="blur"
         sizes="(min-width: 1024px) 16vw, (min-width: 768px) 31vw, 150px"
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
       />
@@ -116,7 +117,7 @@ export function InstagramSection() {
           data-reveal="up"
           className="relative aspect-[369/161] w-full overflow-hidden rounded md:aspect-[736/321] md:rounded-lg lg:aspect-auto lg:w-[49%] lg:shrink-0"
         >
-          <Image src={banner} alt="" fill sizes="(min-width: 1024px) 49vw, 100vw" className="object-cover" />
+          <Image src={banner} alt="" fill placeholder="blur" sizes="(min-width: 1024px) 49vw, 100vw" className="object-cover" />
           <span
             aria-hidden="true"
             className="absolute inset-y-0 left-0 w-[55%] bg-[linear-gradient(-62.5deg,rgba(217,217,217,0)_17.65%,rgba(0,0,0,0.32)_100%)] lg:w-[52%]"

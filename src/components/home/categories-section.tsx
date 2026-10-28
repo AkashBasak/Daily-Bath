@@ -22,6 +22,7 @@ function CategoryCard({ category }: { category: Category }) {
           src={category.image}
           alt={category.imageAlt}
           fill
+          placeholder="blur"
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 33vw, 50vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-focus-visible:scale-110"
         />

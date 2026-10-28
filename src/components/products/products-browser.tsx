@@ -161,7 +161,7 @@ export function ProductsBrowser({ initialCategory }: { initialCategory: string |
             id={panelId}
             ref={panelRef}
             aria-label="Filters"
-            className="absolute top-0 left-4 z-20 hidden w-60 animate-fade-in flex-col gap-6 rounded-lg border border-neutral-200 bg-neutral-50 pt-5 pr-3 pb-2 pl-4 shadow-[0_3px_3px_rgba(161,161,161,0.1),0_10px_5px_rgba(161,161,161,0.09),0_23px_7px_rgba(161,161,161,0.05)] md:flex lg:sticky lg:top-32 lg:left-auto lg:max-h-[calc(100dvh-9rem)] lg:w-[calc((100%-96px)/4)] lg:shrink-0 lg:overflow-y-auto lg:pt-6 lg:pr-4 lg:pl-6 lg:shadow-none"
+            className="absolute top-0 left-4 z-20 hidden w-60 animate-[panel-in_450ms_var(--ease-premium)_both] flex-col gap-6 rounded-lg border border-neutral-200 bg-neutral-50 pt-5 pr-3 pb-2 pl-4 shadow-[0_3px_3px_rgba(161,161,161,0.1),0_10px_5px_rgba(161,161,161,0.09),0_23px_7px_rgba(161,161,161,0.05)] md:flex lg:sticky lg:top-32 lg:left-auto lg:max-h-[calc(100dvh-9rem)] lg:w-[calc((100%-96px)/4)] lg:shrink-0 lg:overflow-y-auto lg:pt-6 lg:pr-4 lg:pl-6 lg:shadow-none"
           >
             <div className="flex items-center justify-between">
               <h2 className="text-lg leading-7 font-semibold text-neutral-900 lg:font-display lg:text-2xl lg:leading-8">Filters</h2>
@@ -250,11 +250,17 @@ export function ProductsBrowser({ initialCategory }: { initialCategory: string |
 
           {/* Grid */}
           {shown.length > 0 ? (
+            // Re-keyed when the layout changes so the cards cascade back in.
             <ul
+              key={panelOpen ? "with-filters" : "full-width"}
               className={`mt-4 grid grid-cols-2 gap-x-4 gap-y-6 md:mt-3 md:grid-cols-3 lg:mt-8 lg:gap-x-8 lg:gap-y-12 ${panelOpen ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}
             >
-              {shown.map((product) => (
-                <li key={product.slug} className="animate-fade-in">
+              {shown.map((product, index) => (
+                <li
+                  key={product.slug}
+                  className="animate-[rise-in_700ms_var(--ease-premium)_both]"
+                  style={{ animationDelay: `${(index % PAGE_SIZE) * 60}ms` }}
+                >
                   <ProductCard product={product} />
                 </li>
               ))}

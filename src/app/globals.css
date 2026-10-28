@@ -22,7 +22,9 @@
   --color-secondary-100: #b3b7db;
   --color-secondary-500: #0a168a;
 
-  --animate-fade-in: fade-in 500ms ease-out;
+  --animate-fade-in: fade-in 500ms ease-out both;
+  --animate-float: float 6s ease-in-out infinite;
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Breakpoints: mobile < 768px, tablet 768–1023px, desktop >= 1024px. */
   --breakpoint-md: 48rem;
@@ -37,6 +39,16 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -10px;
   }
 }
 
@@ -107,6 +119,225 @@ body {
   }
   .site-footer-grid > :nth-child(4) {
     margin-top: 0;
+  }
+}
+
+/* ---------- Motion layer ---------- */
+
+/* First-visit intro: logo wipes in, then the curtain lifts. */
+.intro-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  pointer-events: none;
+  animation: intro-lift 700ms cubic-bezier(0.76, 0, 0.24, 1) 1100ms forwards;
+}
+.intro-curtain__logo {
+  width: min(60vw, 296px);
+  animation: intro-wipe 800ms var(--ease-premium) 150ms both;
+}
+.intro-curtain__bar {
+  margin-top: 1.25rem;
+  height: 2px;
+  width: min(40vw, 160px);
+  transform-origin: left;
+  background: var(--color-primary-500);
+  animation: intro-bar 900ms var(--ease-premium) 150ms both;
+}
+html[data-intro-seen] .intro-curtain {
+  display: none;
+}
+@media (scripting: none) {
+  .intro-curtain {
+    display: none;
+  }
+}
+@keyframes intro-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.4;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+@keyframes intro-bar {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes intro-lift {
+  to {
+    transform: translateY(-100%);
+    visibility: hidden;
+  }
+}
+
+/* Delay hero entrances until the intro has lifted (first visit only). */
+:root {
+  --intro-delay: 1.2s;
+}
+html[data-intro-seen] {
+  --intro-delay: 0s;
+}
+
+/* Home hero: letters rise from a mask, photo unveils upward. */
+@keyframes letter-rise {
+  from {
+    transform: translateY(110%);
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@keyframes unveil {
+  from {
+    clip-path: inset(100% 0 0 0 round 8px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 8px);
+  }
+}
+@keyframes settle {
+  from {
+    scale: 1.15;
+  }
+}
+.hero-letter {
+  display: inline-block;
+  animation: letter-rise 1000ms var(--ease-premium) both;
+  animation-delay: calc(var(--intro-delay) + var(--i) * 45ms);
+}
+.hero-rise {
+  animation: rise-in 900ms var(--ease-premium) both;
+  animation-delay: calc(var(--intro-delay) + 500ms);
+}
+.hero-unveil {
+  animation: unveil 1400ms var(--ease-premium) both;
+  animation-delay: calc(var(--intro-delay) + 300ms);
+}
+.hero-unveil__image {
+  animation: settle 2000ms var(--ease-premium) both;
+  animation-delay: calc(var(--intro-delay) + 300ms);
+}
+
+/* Gentle parallax as the hero photo scrolls away (where supported). */
+@supports (animation-timeline: view()) {
+  .parallax-out {
+    animation: parallax-out linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 100%;
+  }
+  @keyframes parallax-out {
+    to {
+      transform: translateY(12%);
+    }
+  }
+}
+
+/* Staggered entrance for direct children (detail and contact pages). */
+.stagger-in > * {
+  animation: rise-in 800ms var(--ease-premium) both;
+}
+.stagger-in > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.stagger-in > :nth-child(3) {
+  animation-delay: 160ms;
+}
+.stagger-in > :nth-child(4) {
+  animation-delay: 240ms;
+}
+.stagger-in > :nth-child(n + 5) {
+  animation-delay: 320ms;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+}
+
+/* Light sweep across primary buttons on hover. */
+.btn-sheen {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-premium);
+}
+.btn-sheen:hover::after {
+  transform: translateX(120%);
+}
+
+/* Page transitions (React <ViewTransition> in app/template.tsx). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+::view-transition-old(.page-exit) {
+  animation: 180ms ease-out both vt-fade-out;
+}
+::view-transition-new(.page-enter) {
+  animation: 450ms var(--ease-premium) 120ms both vt-rise-in;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* Product photo morphs from its card into the detail gallery. */
+::view-transition-group(.morph) {
+  animation-duration: 550ms;
+  animation-timing-function: var(--ease-premium);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-curtain {
+    display: none;
+  }
+  .parallax-out,
+  .hero-letter,
+  .hero-rise,
+  .hero-unveil,
+  .hero-unveil__image,
+  .stagger-in > * {
+    animation: none !important;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
 

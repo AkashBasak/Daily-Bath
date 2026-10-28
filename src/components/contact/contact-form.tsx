@@ -207,7 +207,7 @@ export function ContactForm() {
 
       <div ref={statusRef} tabIndex={-1} role="status" aria-live="polite" className="w-full empty:hidden focus:outline-none">
         {state?.success && (
-          <p className="flex items-center gap-2 rounded-lg bg-[#ecfdf3] px-4 py-3 text-sm leading-5 font-medium text-[#067647] md:text-base md:leading-6">
+          <p className="flex animate-fade-in items-center gap-2 rounded-lg bg-[#ecfdf3] px-4 py-3 text-sm leading-5 font-medium text-[#067647] md:text-base md:leading-6">
             <svg viewBox="0 0 20 20" aria-hidden="true" className="size-5 shrink-0 fill-current">
               <path d="M10 1.7a8.3 8.3 0 1 0 0 16.6 8.3 8.3 0 0 0 0-16.6zM8.6 13.6 5 10l1.2-1.2 2.4 2.4 5.2-5.2L15 7.2z" />
             </svg>
@@ -215,7 +215,7 @@ export function ContactForm() {
           </p>
         )}
         {state && !state.success && state.error.code !== "VALIDATION_ERROR" && (
-          <p className="flex items-center gap-2 rounded-lg bg-[#fef3f2] px-4 py-3 text-sm leading-5 font-medium text-[#b42318] md:text-base md:leading-6">
+          <p className="flex animate-fade-in items-center gap-2 rounded-lg bg-[#fef3f2] px-4 py-3 text-sm leading-5 font-medium text-[#b42318] md:text-base md:leading-6">
             <svg viewBox="0 0 20 20" aria-hidden="true" className="size-5 shrink-0 fill-current">
               <path d="M10 1.7a8.3 8.3 0 1 0 0 16.6 8.3 8.3 0 0 0 0-16.6zm.9 12.5H9.1v-1.8h1.8zm0-3.3H9.1V5.8h1.8z" />
             </svg>
@@ -227,11 +227,17 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="-mt-4 flex h-11 w-[150px] items-center justify-center gap-3 rounded-lg bg-primary-500 pr-3 pl-6 text-base leading-6 font-medium text-white transition-colors hover:bg-primary-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-800 disabled:cursor-wait disabled:opacity-70 md:h-12 md:w-[200px] md:text-lg lg:-mt-6 lg:h-14 lg:w-[278px]"
+        className="btn-sheen group -mt-4 flex h-11 w-[150px] items-center justify-center gap-3 rounded-lg bg-primary-500 pr-3 pl-6 text-base leading-6 font-medium text-white transition-colors hover:bg-primary-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-800 disabled:cursor-wait disabled:opacity-70 md:h-12 md:w-[200px] md:text-lg lg:-mt-6 lg:h-14 lg:w-[278px]"
       >
+        {pending && (
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-5 animate-spin">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" strokeOpacity="0.3" strokeWidth="2.5" />
+            <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+        )}
         {pending ? "Sending…" : "Submit"}
         {!pending && (
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-6">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-6 transition-transform duration-300 group-hover:translate-x-1">
             <path d="M4 12h16m-6-6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
           </svg>
         )}

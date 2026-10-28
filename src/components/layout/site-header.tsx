@@ -11,10 +11,8 @@ function DesktopNavLink({ item, active }: { item: NavItem; active: boolean }) {
     <Link
       href={item.href}
       aria-current={active ? "page" : undefined}
-      className={`border-b-2 px-4 py-1 text-lg leading-7 font-medium whitespace-nowrap transition-colors focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 ${
-        active
-          ? "border-primary-500 text-neutral-900"
-          : "border-transparent text-neutral-900 hover:text-primary-800"
+      className={`relative px-4 py-1 text-lg leading-7 font-medium whitespace-nowrap text-neutral-900 transition-colors after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:origin-center after:bg-primary-500 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 ${
+        active ? "after:scale-x-100" : "after:scale-x-0 hover:text-primary-800 hover:after:scale-x-100"
       }`}
     >
       {item.label}
@@ -37,6 +35,7 @@ function MenuIcon({ open }: { open: boolean }) {
 export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuId = useId();
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -47,6 +46,14 @@ export function SiteHeader() {
     setLastPathname(pathname);
     setMenuOpen(false);
   }
+
+  // Frosted, raised bar once the page scrolls under it.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -89,7 +96,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-3 z-40 px-3 md:top-4 md:px-4 lg:top-6 lg:px-6">
       <div ref={containerRef} className="relative">
-        <div className="flex items-center justify-between rounded bg-neutral-100 p-2 md:rounded-lg md:p-4 lg:h-20 lg:px-8 lg:py-2">
+        <div
+          className={`flex items-center justify-between rounded p-2 transition-[background-color,box-shadow,backdrop-filter] duration-500 md:rounded-lg md:p-4 lg:h-20 lg:px-8 lg:py-2 ${
+            scrolled
+              ? "bg-neutral-100/80 shadow-[0_8px_30px_rgba(15,23,42,0.08)] backdrop-blur-md backdrop-saturate-150"
+              : "bg-neutral-100"
+          }`}
+        >
           {/* Desktop: links either side of a centred logo. */}
           <nav aria-label="Primary" className="hidden flex-1 items-center gap-2 lg:flex">
             {primaryNav.left.map((item) => (

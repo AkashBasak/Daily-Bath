@@ -6,6 +6,7 @@ import { ProductAccordion } from "@/components/product-details/product-accordion
 import { ProductGallery } from "@/components/product-details/product-gallery";
 import { ShareButton } from "@/components/product-details/share-button";
 import { ProductCard } from "@/components/products/product-card";
+import { RevealGroup } from "@/components/reveal-group";
 import { getProductDetails, getRelatedProducts, howToVideos, marketplaces } from "@/lib/product-details";
 import { products } from "@/lib/products";
 
@@ -43,10 +44,10 @@ export default async function ProductDetailsPage(props: PageProps<"/products/[sl
     <main id="main-content" className="px-3 pt-4 pb-16 md:px-4 md:pb-13 lg:px-6 lg:pt-8 lg:pb-24">
       <div className="mx-auto flex max-w-[1740px] flex-col gap-6 md:flex-row md:items-start md:gap-4 lg:gap-7">
         <div className="md:w-[48.6%] lg:w-[43.7%] md:shrink-0">
-          <ProductGallery images={details.gallery} />
+          <ProductGallery images={details.gallery} morphName={`product-image-${product.slug}`} />
         </div>
 
-        <div className="flex min-w-0 flex-col gap-8 rounded-xl bg-neutral-50 p-3 md:flex-1 md:p-3 lg:gap-14 lg:p-6">
+        <div className="stagger-in flex min-w-0 flex-col gap-8 rounded-xl bg-neutral-50 p-3 md:flex-1 md:p-3 lg:gap-14 lg:p-6">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between gap-4">
@@ -113,32 +114,42 @@ export default async function ProductDetailsPage(props: PageProps<"/products/[sl
         </div>
       </div>
 
-      <div className="mx-auto mt-8 max-w-[920px] md:mt-7 lg:mt-24">
-        <ProductAccordion
-          defaultOpen={2}
-          items={[
-            { title: "Ingredients", points: details.ingredients },
-            { title: "Benefits", points: details.benefits },
-            { title: "How to use", points: details.howToUse },
-          ]}
-        />
-      </div>
+      <RevealGroup className="mx-auto mt-8 max-w-[920px] md:mt-7 lg:mt-24">
+        <div data-reveal="up">
+          <ProductAccordion
+            defaultOpen={2}
+            items={[
+              { title: "Ingredients", points: details.ingredients },
+              { title: "Benefits", points: details.benefits },
+              { title: "How to use", points: details.howToUse },
+            ]}
+          />
+        </div>
+      </RevealGroup>
 
       <section aria-labelledby="related-heading" className="mx-auto mt-12 max-w-[1872px] md:mt-12 lg:mt-30">
-        <h2
-          id="related-heading"
-          className="font-display text-lg leading-7 font-semibold text-neutral-900 md:text-[40px] md:leading-12 md:font-bold lg:text-center lg:text-7xl lg:leading-[88px]"
-        >
-          Related Products
-        </h2>
-        <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-6 md:mt-3 md:grid-cols-3 lg:mt-8 lg:grid-cols-4 lg:gap-8">
-          {related.map((item, index) => (
-            // The tablet design shows a single row of three.
-            <li key={item.slug} className={index === 3 ? "md:hidden lg:block" : undefined}>
-              <ProductCard product={item} headingLevel="h3" />
-            </li>
-          ))}
-        </ul>
+        <RevealGroup>
+          <h2
+            data-reveal="up"
+            id="related-heading"
+            className="font-display text-lg leading-7 font-semibold text-neutral-900 md:text-[40px] md:leading-12 md:font-bold lg:text-center lg:text-7xl lg:leading-[88px]"
+          >
+            Related Products
+          </h2>
+          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-6 md:mt-3 md:grid-cols-3 lg:mt-8 lg:grid-cols-4 lg:gap-8">
+            {related.map((item, index) => (
+              // The tablet design shows a single row of three.
+              <li
+                key={item.slug}
+                data-reveal="up"
+                style={{ transitionDelay: `${100 + index * 80}ms` }}
+                className={index === 3 ? "md:hidden lg:block" : undefined}
+              >
+                <ProductCard product={item} headingLevel="h3" />
+              </li>
+            ))}
+          </ul>
+        </RevealGroup>
       </section>
     </main>
   );

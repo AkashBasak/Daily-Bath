@@ -79,6 +79,7 @@ export function CategoryStrip({ categories, activeSlug, onSelect }: CategoryStri
                     src={category.image}
                     alt=""
                     fill
+                    placeholder="blur"
                     sizes="(min-width: 1536px) 200px, (min-width: 1024px) 160px, (min-width: 768px) 120px, 64px"
                     className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />

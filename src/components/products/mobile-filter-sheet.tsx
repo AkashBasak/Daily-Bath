@@ -160,10 +160,10 @@ export function MobileFilterSheet({ open, applied, onApply, onClose }: MobileFil
           <button
             type="button"
             onClick={() => onApply(draft)}
-            className="flex h-11 items-center gap-2 rounded-lg bg-primary-500 pr-3 pl-6 text-sm leading-5 font-medium text-white transition-colors hover:bg-primary-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-800"
+            className="btn-sheen group flex h-11 items-center gap-2 rounded-lg bg-primary-500 pr-3 pl-6 text-sm leading-5 font-medium text-white transition-colors hover:bg-primary-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-800"
           >
             Explore {resultCount} {resultCount === 1 ? "Product" : "Products"}
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-5">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-5 transition-transform duration-300 group-hover:translate-x-1">
               <path d="M4 12h16m-6-6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
             </svg>
           </button>

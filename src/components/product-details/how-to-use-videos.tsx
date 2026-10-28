@@ -33,6 +33,7 @@ export function HowToUseVideos({ videos }: { videos: HowToVideo[] }) {
                   src={video.poster}
                   alt=""
                   fill
+                  placeholder="blur"
                   sizes="(min-width: 1024px) 225px, 45vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />

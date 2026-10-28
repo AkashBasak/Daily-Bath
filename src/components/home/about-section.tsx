@@ -19,6 +19,7 @@ export function AboutSection() {
               src={flowerBath}
               alt="Woman relaxing in a bath filled with fresh flowers"
               fill
+              placeholder="blur"
               sizes="(min-width: 1024px) 40vw, (min-width: 768px) 70vw, 65vw"
               className="object-cover"
             />
@@ -68,6 +69,7 @@ export function AboutSection() {
               src={labTeam}
               alt="Daily Bath team members holding flasks in a laboratory"
               fill
+              placeholder="blur"
               sizes="(min-width: 1024px) 20vw, 225px"
               className="object-cover"
             />

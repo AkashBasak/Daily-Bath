@@ -19,6 +19,7 @@ export function BrandHero() {
             alt="Woman resting on the edge of a bubble bath beside two pump bottles"
             fill
             priority
+            placeholder="blur"
             sizes="(min-width: 1024px) 50vw, (min-width: 768px) 48vw, 100vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           />

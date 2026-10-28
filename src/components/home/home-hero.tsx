@@ -2,6 +2,8 @@ import Image from "next/image";
 import { SocialLinks } from "@/components/social-links";
 import heroImage from "@/assets/images/hero-bath.png";
 
+const headline = ["GLOW", "NATURALLY"];
+
 export function HomeHero() {
   return (
     <section
@@ -13,10 +15,25 @@ export function HomeHero() {
           id="home-hero-heading"
           className="w-full text-center font-display text-[calc((100vw-3.5rem)/9.3)] leading-[1.22] font-bold tracking-[0.04em] text-balance text-neutral-900 md:text-[calc((100vw-6rem)/9.3)] lg:text-[min(calc((100vw-11.25rem)/9.3),11.78rem)] lg:leading-[0.8125]"
         >
-          GLOW NATURALLY
+          <span className="sr-only">GLOW NATURALLY</span>
+          {/* Each letter rises out of a mask; words stay together when wrapping. */}
+          <span aria-hidden="true">
+            {headline.map((word, w) => (
+              <span key={word}>
+                {w > 0 && " "}
+                <span className="-my-[0.12em] inline-block overflow-hidden py-[0.12em] align-bottom">
+                  {word.split("").map((letter, i) => (
+                    <span key={i} className="hero-letter" style={{ "--i": w * 4 + i } as React.CSSProperties}>
+                      {letter}
+                    </span>
+                  ))}
+                </span>
+              </span>
+            ))}
+          </span>
         </h1>
 
-        <div className="flex w-full flex-col items-center gap-8 md:flex-row md:items-end md:justify-between md:gap-6">
+        <div className="hero-rise flex w-full flex-col items-center gap-8 md:flex-row md:items-end md:justify-between md:gap-6">
           <p className="max-w-[350px] text-center text-xs leading-[18px] md:max-w-[427px] md:text-left md:text-sm md:leading-5 lg:max-w-[614px] lg:text-base lg:leading-6">
             Daily Bath is currently at an early brand-development stage. The brand name has been established,
             while its product portfolio, brand positioning, visual direction, and communication strategy are
@@ -34,15 +51,18 @@ export function HomeHero() {
         </div>
       </div>
 
-      <div className="relative w-full overflow-hidden rounded md:rounded lg:rounded-lg">
-        <Image
-          src={heroImage}
-          alt="A woman relaxing in a foam-filled bathtub in a teal-tiled bathroom"
-          priority
-          placeholder="blur"
-          sizes="(min-width: 1024px) calc(100vw - 48px), (min-width: 768px) calc(100vw - 32px), calc(100vw - 24px)"
-          className="aspect-[1872/720] h-auto w-full object-cover"
-        />
+      <div className="hero-unveil relative w-full overflow-hidden rounded md:rounded lg:rounded-lg">
+        {/* Unveils on load, then drifts slightly as it scrolls away. */}
+        <div className="parallax-out">
+          <Image
+            src={heroImage}
+            alt="A woman relaxing in a foam-filled bathtub in a teal-tiled bathroom"
+            priority
+            placeholder="blur"
+            sizes="(min-width: 1024px) calc(100vw - 48px), (min-width: 768px) calc(100vw - 32px), calc(100vw - 24px)"
+            className="hero-unveil__image aspect-[1872/720] h-auto w-full object-cover"
+          />
+        </div>
       </div>
     </section>
   );
