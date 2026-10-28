@@ -7,7 +7,6 @@ import botanicalOil from "@/assets/images/product-details/gallery-botanical-oil.
 import niacinamideSerum from "@/assets/images/product-details/gallery-niacinamide-serum.png";
 import plumpingSerum from "@/assets/images/product-details/gallery-plumping-serum.png";
 import shampooDuo from "@/assets/images/product-details/gallery-shampoo-duo.png";
-import pomeloBodyWash from "@/assets/images/product-details/pomelo-body-wash.png";
 import { getCategory, products, type Product } from "@/lib/products";
 
 export type GalleryImage = { src: StaticImageData; alt: string; fit: "contain" | "cover" };
@@ -63,9 +62,7 @@ export function getProductDetails(slug: string): ProductDetails | undefined {
   const product = products.find((p) => p.slug === slug);
   if (!product) return undefined;
 
-  const lead: GalleryImage = product.image
-    ? { src: product.image, alt: product.name, fit: product.imageFit }
-    : { src: pomeloBodyWash, alt: product.name, fit: "cover" };
+  const lead: GalleryImage = { src: product.image, alt: product.name, fit: product.imageFit };
 
   return {
     product,

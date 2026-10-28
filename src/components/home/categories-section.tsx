@@ -17,16 +17,14 @@ function CategoryCard({ category }: { category: Category }) {
       href={category.productCategory ? `/products?category=${category.productCategory}` : "/products"}
       className="group relative block aspect-[602/350] overflow-hidden rounded-[10px] bg-neutral-300 transition-[translate,box-shadow,scale] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_7px_15px_rgba(115,115,115,0.1),0_27px_27px_rgba(115,115,115,0.09),0_61px_37px_rgba(115,115,115,0.05)] focus-visible:-translate-y-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500 active:translate-y-0 active:scale-[0.98] md:rounded-xl 2xl:rounded-[32px]"
     >
-      {category.image && (
-        <Image
-          src={category.image}
-          alt={category.imageAlt}
-          fill
-          placeholder="blur"
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 33vw, 50vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-focus-visible:scale-110"
-        />
-      )}
+      <Image
+        src={category.image}
+        alt={category.imageAlt}
+        fill
+        placeholder="blur"
+        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 33vw, 50vw"
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-focus-visible:scale-110"
+      />
       <span aria-hidden="true" className="absolute inset-0 bg-black/30" />
 
       <span className="absolute inset-3 flex flex-col items-start justify-between md:inset-4 lg:inset-6 min-[1800px]:inset-10">

@@ -69,8 +69,7 @@ export function SiteFooter() {
 
         <div className="flex flex-col items-center gap-1 [grid-area:parent] md:items-start">
           <span className="text-xs leading-[18px] text-neutral-300 2xl:text-sm 2xl:leading-5">Proud concern of</span>
-          {/* TODO(owner): replace with the Bearth logo asset. */}
-          <span role="img" aria-label="Bearth" className="block h-5 w-[83px] rounded-sm bg-white/25 md:h-6 md:w-[99px] 2xl:h-8 2xl:w-[132px]" />
+          <Image src="/brand/bearth-logo.svg" alt="Bearth" width={133} height={32} className="h-5 w-auto md:h-6 2xl:h-8" />
         </div>
 
         <div className="flex items-center justify-center [grid-area:brand] md:justify-end lg:flex-wrap lg:justify-between lg:gap-4">

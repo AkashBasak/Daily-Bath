@@ -35,23 +35,18 @@ export function ProductCard({ product, headingLevel: Heading = "h2" }: { product
         {/* Shares its name with the detail page gallery, so the photo morphs across. */}
         <ViewTransition name={`product-image-${product.slug}`} share="morph" default="none">
           <div className="relative aspect-square overflow-hidden rounded-lg bg-[rgba(232,248,252,0.5)] transition-[background-color,box-shadow] duration-300 group-hover:bg-primary-100/60 group-hover:shadow-[0_10px_24px_rgba(13,103,122,0.12)] md:rounded-xl">
-            {product.image ? (
-              <Image
-                src={product.image}
-                alt=""
-                fill={product.imageFit === "cover"}
-                placeholder="blur"
-                sizes="(min-width: 1024px) 23vw, (min-width: 768px) 31vw, 47vw"
-                className={
-                  product.imageFit === "cover"
-                    ? "object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    : "absolute inset-[10.6%] size-[78.8%] object-contain transition-transform duration-500 ease-out group-hover:scale-108"
-                }
-              />
-            ) : (
-              // TODO(owner): product photo still to be supplied.
-              <span aria-hidden="true" className="absolute inset-[10.6%] rounded-md bg-neutral-200" />
-            )}
+            <Image
+              src={product.image}
+              alt=""
+              fill={product.imageFit === "cover"}
+              placeholder="blur"
+              sizes="(min-width: 1024px) 23vw, (min-width: 768px) 31vw, 47vw"
+              className={
+                product.imageFit === "cover"
+                  ? "object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  : "absolute inset-[10.6%] size-[78.8%] object-contain transition-transform duration-500 ease-out group-hover:scale-108"
+              }
+            />
           </div>
         </ViewTransition>
         <span className="flex h-8 items-center justify-center rounded-full bg-neutral-50 text-xs leading-[18px] font-medium text-neutral-900 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white lg:h-10 lg:text-base lg:leading-6">

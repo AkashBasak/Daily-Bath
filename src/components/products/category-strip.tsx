@@ -74,16 +74,14 @@ export function CategoryStrip({ categories, activeSlug, onSelect }: CategoryStri
                   active ? "ring-2 ring-primary-500 ring-offset-2" : ""
                 }`}
               >
-                {category.image && (
-                  <Image
-                    src={category.image}
-                    alt=""
-                    fill
-                    placeholder="blur"
-                    sizes="(min-width: 1536px) 200px, (min-width: 1024px) 160px, (min-width: 768px) 120px, 64px"
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                  />
-                )}
+                <Image
+                  src={category.image}
+                  alt=""
+                  fill
+                  placeholder="blur"
+                  sizes="(min-width: 1536px) 200px, (min-width: 1024px) 160px, (min-width: 768px) 120px, 64px"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                />
                 <span aria-hidden="true" className="absolute inset-0 bg-linear-to-b from-black/0 to-black/30" />
                 <span className="absolute bottom-1 left-1.5 text-left text-[10px] leading-3 font-semibold text-white md:bottom-2 md:left-2 md:text-sm md:leading-5 2xl:bottom-4 2xl:left-4 2xl:text-lg 2xl:leading-7">
                   {category.name}
